@@ -1,0 +1,64 @@
+
+
+-- Error Documentation -- 
+Below is a list of errors and warnings raised throughout the calls of functions.
+Warnings may not terminate the program, however, errors can.
+
+- List of Error Codes -
+
+- Format: ERROR xxxx/ WARNING xxxx
+
+Message: The message provided by the error.
+Type: The type of std error.
+
+Description: A description of the error.
+
+ERROR 1000
+
+Message: "ERROR1000: No Logging File Opened"
+Type: std::runtime_error()
+
+Error 1000 occurs any time the Log() function is called before the OpenLog() function is called
+to open a logging file. Without calling OpenLog(), Log() has no file to insert the "cMessage"
+parameter and therefore throws a runtime error.
+
+ERROR 1012
+
+Message: "ERROR1012: File or directory not found: + * The path entered in the functions parameter or found in a variable *"
+Type: std::runtime_error(), std::invalid_arguement()
+
+Error 1012 occurs anytime an invalid argument is provided to functions such as CreateLog() and OpenLog().
+This error is a result of the path not existing. During the process of the function checking to see if the path provided
+exists, if it concludes the path does not exist, it will throw a runtime error or invalid argument error to prevent the
+log file not being created.
+
+ERROR 2009
+
+Message: "ERROR2009: File is already OPEN/CLOSED: + * Path of file *"
+Type: std::runtime_error()
+
+Error 2009 can happen anytime a function which acts like or is OpenLog() or CloseLog(). 
+This happens when the function tries to open a file that is already open or,
+whenever a function tries to close a file that is already closed. 
+
+ERROR 1404
+Message: "ERROR1404: File already exists: * Path of file passed through as fuction argument *"
+Type: std::runtime_error()
+
+Error 1404 is a very important error that happens when a large mistake could have occured.
+This error prevents the creation of a file with the same name in the same path as the log file. Without this security,
+logs can become corrupted and lost. After, the log file will become blank and all data will be lost. 
+This error can be found in the CreateLog() function. 
+
+- List of Warnings and Codes -
+
+WARNING 8028 
+Message: "WARNING8028: Log File Path Not Found"
+Type: std::string/const char*
+
+Warning 8028 is often times raised whenever a function attempts to search for a log file path.
+This warning happens whenever the function could not locate the log file path. It is likely some parameters
+are incorrect in a different function, or a log file has not been opened and entered in the program.
+This warning is common when the function GetLogPath() is ran before OpenLog() is ran.
+
+The program will not terminate after this warning.
